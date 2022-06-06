@@ -27,6 +27,25 @@ public class bubble {
         println(array);
     }
 
+    public static void optimizedBubbleSort(ArrayList<Integer> array){
+        Boolean isSwapped = false;
+        for(Integer i = 0; i < array.size() - 1; i++){
+            for(Integer j = i + 1; j < array.size(); j++){
+                isSwapped = true;
+                if (array.get(i) > array.get(j)){
+                    // swapping happens
+                    Integer temp = array.get(j);
+                    array.set(j, array.get(i));
+                    array.set(i, temp);
+                }
+            }
+            if(isSwapped == false){
+                break;
+            }
+        }
+        println(array);
+    }
+
     public static void main(String[] args){
         ArrayList<Integer> array = new ArrayList<Integer>();
         Scanner my_scanner = new Scanner(System.in);
@@ -39,6 +58,7 @@ public class bubble {
             array.add(my_scanner.nextInt());
         }
         println(array);
-        bubbleSort(array);
+        //bubbleSort(array);
+        optimizedBubbleSort(array);
     }
 }
