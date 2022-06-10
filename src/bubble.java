@@ -91,6 +91,21 @@ public class bubble {
         System.out.printf("]");
     }
 
+    public static void selectionSort(ArrayList<Integer> array){
+        for(int i = 0; i < array.size() - 1; i++){
+            int min = i;
+            for(int j = i+1; j < array.size(); j++ ){
+                if(array.get(j) < array.get(min)){
+                    min = j;
+                }
+            }
+            int temp = array.get(min);
+            array.set(min, i);
+            array.set(i, temp);
+        }
+    }
+
+
     public static void main(String[] args){
         ArrayList<Integer> array = new ArrayList<>();
         Scanner my_scanner = new Scanner(System.in);
@@ -110,8 +125,9 @@ public class bubble {
         //bubbleSort(array);
         //optimizedBubbleSort(array);
         //quickSort(array, L, H);
-        int[] insert_array = new int[]{10,12,23,4,25};
-        insertionSort(insert_array);
-        //println(array);
+//        int[] insert_array = new int[]{10,12,23,4,25};
+//        insertionSort(insert_array);
+        selectionSort(array);
+        println(array);
     }
 }
