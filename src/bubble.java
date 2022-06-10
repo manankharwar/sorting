@@ -12,6 +12,41 @@ public class bubble {
         System.out.println();
     }
 
+    //starting off with a good one! All the best
+    public static void mergeSort(ArrayList<Integer> array, ArrayList<Integer> temp, int lowStart, int highEnd){
+        int middle = (lowStart + highEnd) / 2;
+        mergeSort(array, temp, lowStart, middle);
+        mergeSort(array, temp, middle + 1, highEnd);
+        mergeHalves(array, temp, lowStart, highEnd);
+    }
+
+    public static void mergeHalves(ArrayList<Integer> array, ArrayList<Integer> temp, int lowStart, int highEnd){
+        int lowEnd = (lowStart + highEnd) / 2;
+        int highStart = lowEnd + 1;
+        int size = highEnd - lowStart + 1;
+
+        int left = lowStart;
+        int high = highStart;
+        int index = lowStart;
+
+        while(left <= lowEnd && high <= highEnd){
+            if (array.get(left) <= array.get(high)){
+                temp.set(index, array.get(left));
+                left += 1;
+            }
+            else{
+                temp.set(index, array.get(high));
+                high += 1;
+            }
+            index += 1;
+            // if one of the pointers goes out of bounds, what we need to do is just copy the remainder of the elements
+            temp.addAll(lowEnd - left + 1, array);
+            temp.addAll(highEnd - high + 1, array);
+            array.addAll(temp);
+        }
+    }
+
+
     public static void bubbleSort(ArrayList<Integer> array){
         for(int i = 0; i < array.size() - 1; i++){
             for(int j = i + 1; j < array.size(); j++){
@@ -127,7 +162,10 @@ public class bubble {
         //quickSort(array, L, H);
 //        int[] insert_array = new int[]{10,12,23,4,25};
 //        insertionSort(insert_array);
-        selectionSort(array);
+        //selectionSort(array);
+        int low = 0;
+        int high = array.size();
+        mergeSort(array, new ArrayList<Integer>(), low, high);
         println(array);
     }
 }
