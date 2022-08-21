@@ -97,25 +97,25 @@ public class bubble {
 //        }
 //    }
 
+
+    //Insertion sort is frequently used to arrange small lists.
+    // On the other hand, Insertion sort isn’t the most efficient method for handling large lists with numerous elements
+
     public static void insertionSort(int[] array){
+        ArrayList<Integer> array_list = new ArrayList<>();
         for(int i = 1; i < array.length; i++){
+            int current = array[i];
             int j = i - 1;
-            int key = array[i];
-            while(j >= 0 && key < array[j]){
-                int temp = array[j];
-                array[j] = array[j+1];
-                array[j+1] = temp;
-                j = j - 1;
+            while(j >= 0 && current < array[j]){
+                array[j+1] = array[j];
+                j--;
             }
-            array[j+1] = key;
-
-
+            array[j+1] = current;
         }
-        System.out.printf("[");
         for(int i = 0; i < array.length; i++){
-            System.out.print(array[i] + ", ");
+            array_list.add(array[i]);
         }
-        System.out.printf("]");
+        println(array_list);
     }
 
     public static void selectionSort(ArrayList<Integer> array){
@@ -132,30 +132,29 @@ public class bubble {
         }
     }
 
-
     public static void main(String[] args){
         ArrayList<Integer> array = new ArrayList<>();
         Scanner my_scanner = new Scanner(System.in);
         int num;
-        System.out.println("Enter an integer");
-        num = my_scanner.nextInt();
-
-        for(int i = 0; i < num; i++){
-            System.out.println("Enter the number: ");
-            array.add(my_scanner.nextInt());
-        }
+//        System.out.println("Enter an integer");
+//        num = my_scanner.nextInt();
+//
+//        for(int i = 0; i < num; i++){
+//            System.out.println("Enter the number: ");
+//            array.add(my_scanner.nextInt());
+//        }
 
         Integer L = 0;
         Integer H = array.size() - 1;
-
-        println(array);
-        quickSort(array, L, H);
-        println(array);
+        int[] insert_array = {5,4,7,1,8,3};
+        //println(array);
+//        quickSort(array, L, H);
+//        println(array);
         //bubbleSort(array);
         //optimizedBubbleSort(array);
         //quickSort(array, L, H);
 //        int[] insert_array = new int[]{10,12,23,4,25};
-////        insertionSort(insert_array);
+        insertionSort(insert_array);
 //        selectionSort(array);
 //        println(array);
     }
