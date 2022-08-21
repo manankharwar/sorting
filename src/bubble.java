@@ -4,9 +4,8 @@ import java.util.Scanner;
 
 public class bubble {
     // this one can take all the parameters like string, integers, etc.
-    @SafeVarargs
-    public static void println(ArrayList<Integer>... array){
-        for(ArrayList<Integer> i: array) {
+    public static void println(ArrayList<Integer> array){
+        for(Integer i: array) {
             System.out.print(i + " ");
         }
         System.out.println();
@@ -45,30 +44,58 @@ public class bubble {
         println(array);
     }
 
-    public static Integer partition(ArrayList<Integer> array, Integer low, Integer high){
-        int pivot_value = array.get(high);
-        int i = low - 1; // index of smaller element and indicates the correct position of the pivot_value
+    public static int partition(ArrayList<Integer> array, int low, int high){
+        int pivot = array.get(high);
+        int i = low - 1;
         for(int j = low; j <= high - 1; j++){
-            if (array.get(j) < pivot_value){
+            if(array.get(j) < pivot){
+                // swap array.get(i) && array.get(j)
                 i++;
-                // swap two elements
-                int temp = array.get(j);
-                array.set(j, array.get(i));
-                array.set(i, temp);
+                int temp = array.get(i);
+                array.set(i, array.get(j));
+                array.set(j, temp);
             }
         }
         int temp = array.get(high);
-        array.set(high, array.get(i + 1));
-        array.set(i + 1, temp);
+        array.set(high, array.get(i+1));
+        array.set(i+1, temp);
+
         return i + 1;
     }
-    public static void quickSort(ArrayList<Integer> array, Integer L, Integer H){
-        if(L < H){
-            int p = partition(array, L, H);
-            quickSort(array, L, p - 1);
-            quickSort(array, p + 1, H);
+
+    public static void quickSort(ArrayList<Integer> array, int low, int high){
+        if(low < high){
+            int p = partition(array, low, high);
+            quickSort(array, low, p-1);
+            quickSort(array, p+1, high);
         }
     }
+
+
+//    public static Integer partition(ArrayList<Integer> array, Integer low, Integer high){
+//        int pivot_value = array.get(high);
+//        int i = low - 1; // index of smaller element and indicates the correct position of the pivot_value
+//        for(int j = low; j <= high - 1; j++){
+//            if (array.get(j) < pivot_value){
+//                i++;
+//                // swap two elements
+//                int temp = array.get(j);
+//                array.set(j, array.get(i));
+//                array.set(i, temp);
+//            }
+//        }
+//        int temp = array.get(high);
+//        array.set(high, array.get(i + 1));
+//        array.set(i + 1, temp);
+//        return i + 1;
+//    }
+//    public static void quickSort(ArrayList<Integer> array, Integer L, Integer H){
+//        if(L < H){
+//            int p = partition(array, L, H);
+//            quickSort(array, L, p - 1);
+//            quickSort(array, p + 1, H);
+//        }
+//    }
 
     public static void insertionSort(int[] array){
         for(int i = 1; i < array.length; i++){
@@ -122,12 +149,14 @@ public class bubble {
         Integer H = array.size() - 1;
 
         println(array);
+        quickSort(array, L, H);
+        println(array);
         //bubbleSort(array);
         //optimizedBubbleSort(array);
         //quickSort(array, L, H);
 //        int[] insert_array = new int[]{10,12,23,4,25};
-//        insertionSort(insert_array);
-        selectionSort(array);
-        println(array);
+////        insertionSort(insert_array);
+//        selectionSort(array);
+//        println(array);
     }
 }
